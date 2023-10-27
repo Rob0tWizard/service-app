@@ -8,6 +8,21 @@ services:
     volumes:
       - ./service:/service
 #подключенная папка с локальной машины в контейнер. Локальные изменения - изменения в контейнере, чтоб изменения питон кода применялисьсразу же
-
+    environment:
+      - DB_HOST=database
+      - DB_NAME=dbname
+      - DB_USER=dbuser
+      - DB_PASS=pass
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+      
+    depends_on:
+      - database
+    #значит что наш сервис зависит от другого сервиса(датабэйс),тоесть мы НЕ должны запускать web-app раньше чем database
+
+  database:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_DB=dbname
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=pass
