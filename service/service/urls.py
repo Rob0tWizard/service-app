@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+
+from services.views import SubscriptionView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+router = routers.DefaultRouter()
+router.register(r'api/subscriptions', SubscriptionView)  # r' ' - регулярное выражение
+# для дефолтного роутера мы можем передавать view наследованное от ModelViewSet и он сам генерирует урлы
+
+urlpatterns += router.urls
