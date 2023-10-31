@@ -9,6 +9,9 @@ class Service(models.Model):
     name=models.CharField(max_length=50)
     full_price=models.PositiveIntegerField()
 
+    def __str__(self):
+        return f'Service : {self.name}'
+
 #тарифные план
 class Plan(models.Model):
     #ниже идет кортеж с кортежами
@@ -25,6 +28,9 @@ class Plan(models.Model):
                                                      MaxValueValidator(100)
                                                  ])
 
+    def __str__(self):
+        return f'Plan : {self.plan_type}'
+
 
 class Subscriptions(models.Model):
     client = models.ForeignKey(Client, related_name='subscriptions', on_delete=models.PROTECT)
@@ -32,3 +38,6 @@ class Subscriptions(models.Model):
     #тоесть чтоб показать подписки клиента client.subscriptions.all , или через фильтры
     service = models.ForeignKey(Service, related_name='subscriptions', on_delete=models.PROTECT)
     plan = models.ForeignKey(Plan, related_name='subscriptions', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'Subscriptions : {self.service}'

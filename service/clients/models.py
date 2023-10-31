@@ -10,3 +10,7 @@ class Client(models.Model):
     company_name=models.CharField(max_length=100)
     full_addres=models.CharField(max_length=100)
 #просто поле чтоб не было пусто и скучно
+
+    def __str__(self):
+        return f'Client : {self.company_name}'
+    #это нужно для вывода нормального имени клиента в админке, а не просто ID
