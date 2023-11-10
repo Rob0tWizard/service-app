@@ -1,8 +1,8 @@
 from django.conf import settings
-from django.db.models import Prefetch, F, Sum
-from django.shortcuts import render
-from rest_framework.viewsets import ReadOnlyModelViewSet
 from django.core.cache import cache
+from django.db.models import Prefetch, Sum
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
 from clients.models import Client
 from services.models import Subscriptions
 from services.serializers import SubscriptionSerializer
